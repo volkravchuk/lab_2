@@ -5,9 +5,9 @@ import Experience from './components/Experience';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Languages from './components/Languages';
-// import Footer from './components/Footer';
-// import Reviews from './components/Reviews';
-// import ContactForm from './components/ContactForm';
+import Footer from './components/Footer';
+import Reviews from './components/Reviews';
+import ContactForm from './components/ContactForm';
 
 function App() {
     const [theme, setTheme] = useState('light');
@@ -63,13 +63,13 @@ function App() {
                     </div>
                     <Languages />
                     {}
-                    {/*<Reviews />*/}
+                    <Reviews />
                 </main>
-                {/*<Footer />*/}
+                <Footer />
             </div>
 
             {}
-            {/*<ContactForm />*/}
+            <ContactForm />
         </div>
     );
 }
