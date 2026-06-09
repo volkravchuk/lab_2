@@ -3,6 +3,36 @@ import { useState, useEffect } from 'react';
 function ContactForm() {
     const [isOpen, setIsOpen] = useState(false);
 
+    // Додай нову функцію обробки відправки
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            message: e.target.message.value
+        };
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert('Дякуємо! Повідомлення надіслано.');
+                setIsOpen(false);
+            } else {
+                alert('Сталася помилка, спробуйте пізніше.');
+            }
+        } catch (error) {
+            console.error('Помилка:', error);
+            alert('Не вдалося з\'єднатися з сервером.');
+        }
+    };
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsOpen(true);
@@ -25,7 +55,7 @@ function ContactForm() {
                 
                 <h2 className="text-2xl font-bold mb-6 text-slate-800 dark:text-white">Зворотній зв'язок</h2>
                 
-                <form action="https://formspree.io/f/xbdbvyqq" method="POST" className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Ім'я</label>
                         <input type="text" name="name" required className="mt-1 w-full p-2 border border-slate-300 dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
